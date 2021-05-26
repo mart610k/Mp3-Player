@@ -2,6 +2,7 @@
 using MP3Player.Droid;
 using Android.Media;
 using Android.Content.Res;
+using MP3Player.Classes;
 
 [assembly: Dependency(typeof(DroidMediaPlayer))]
 
@@ -22,7 +23,7 @@ namespace MP3Player.Droid
             playlist = new PlayList();
         }
         
-        public void PlayPauseAudioFile()
+        public void PlayPausePlayback()
         {
             if (!player.IsPlaying)
             {
@@ -34,13 +35,12 @@ namespace MP3Player.Droid
             }
         }
 
-        public void SelectTrack(string fileName)
+        public void SelectTrack(ITrack fileName)
         {
             player.Stop();
             player.Reset();
-            FileLocation = fileName;
 
-            CurrentlyPlaying = Android.App.Application.Context.Assets.OpenFd(fileName);
+            CurrentlyPlaying = Android.App.Application.Context.Assets.OpenFd(fileName.LocalFileName);
 
             player.SetDataSource(CurrentlyPlaying.FileDescriptor, CurrentlyPlaying.StartOffset, CurrentlyPlaying.Length);
 
@@ -54,7 +54,7 @@ namespace MP3Player.Droid
             player.Stop();
             player.Reset();
 
-            CurrentlyPlaying = Android.App.Application.Context.Assets.OpenFd(playlist.NextTrack());
+            CurrentlyPlaying = Android.App.Application.Context.Assets.OpenFd(playlist.NextTrack().LocalFileName);
 
             player.SetDataSource(CurrentlyPlaying.FileDescriptor, CurrentlyPlaying.StartOffset, CurrentlyPlaying.Length);
 
@@ -66,6 +66,23 @@ namespace MP3Player.Droid
             SelectTrack(playlist.NextTrack());
 
             player.Start();
+        }
+
+        
+
+        public void PreviousTrack()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void StopPlayback()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        ITrack IMediaPlayer.CurrentlyPlaying()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

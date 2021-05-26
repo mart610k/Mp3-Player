@@ -2,25 +2,20 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MP3Player
+namespace MP3Player.Classes
 {
     public interface IMediaPlayer
     {
         /// <summary>
-        /// File location of the current playing track
-        /// </summary>
-        string FileLocation { get; }
-
-        /// <summary>
         /// select track by filename
         /// </summary>
         /// <param name="fileName">Filename to select</param>
-        void SelectTrack(string fileName);
+        void SelectTrack(ITrack fileName);
 
         /// <summary>
         /// PLay and pause the currently playing track
         /// </summary>
-        void PlayPauseAudioFile();
+        void PlayPausePlayback();
 
         /// <summary>
         /// Select a playlist to play
@@ -32,5 +27,23 @@ namespace MP3Player
         /// Skips the currently playing track and proceeds to the next track
         /// </summary>
         void SkipTrack();
+
+        /// <summary>
+        /// Go back the to previously playing track
+        /// </summary>
+        void PreviousTrack();
+
+
+        /// <summary>
+        /// Stops the currently playing track by returning to 0:00 of the track
+        /// </summary>
+        void StopPlayback();
+
+        /// <summary>
+        /// Gets the currently playing track
+        /// </summary>
+        /// <returns>The track which is currently playing</returns>
+        ITrack CurrentlyPlaying();
+
     }
 }
