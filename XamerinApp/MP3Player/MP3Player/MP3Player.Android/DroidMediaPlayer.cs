@@ -13,6 +13,7 @@ namespace MP3Player.Droid
     {
         private MediaPlayer player;
         private IPlayList playlist;
+        private IMediaPlayerObserver observer = null;
 
         public DroidMediaPlayer()
         {
@@ -46,6 +47,7 @@ namespace MP3Player.Droid
         private void On_Current_Track_Completion(object sender, EventArgs e)
         {
             SkipTrack();
+            NotifyObserver();
         }
 
         /// <summary>
@@ -92,6 +94,24 @@ namespace MP3Player.Droid
         public ITrack CurrentlyPlaying()
         {
             return playlist.CurrentTrack();
+        }
+
+        public void RegisterObserver(IMediaPlayerObserver playerObserver)
+        {
+            observer = playerObserver;
+        }
+
+        public void RemoveObserver()
+        {
+            observer = null;
+        }
+
+        public void NotifyObserver()
+        {
+            if(observer != null)
+            {
+                observer.Update();
+            }
         }
     }
 }

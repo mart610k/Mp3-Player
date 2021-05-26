@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MP3Player.Classes
 {
-    public interface IMediaPlayer
+    public interface IMediaPlayer : IMediaPlayerSubject
     {
         /// <summary>
         /// select track by filename

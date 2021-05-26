@@ -9,7 +9,7 @@ using MP3Player.Classes;
 
 namespace MP3Player
 {
-    public partial class MainPage : ContentPage
+    public partial class MainPage : ContentPage,IMediaPlayerObserver
     {
         IMediaPlayer mediaPlayer = DependencyService.Get<IMediaPlayer>();
 
@@ -18,7 +18,7 @@ namespace MP3Player
             InitializeComponent();
             
             IPlayList playlist = new PlayList();
-
+            mediaPlayer.RegisterObserver(this);
             playlist.AddTracks(new ITrack[]{
                 new Track("","","mixkit-facility-alarm-908.wav"),
                 new Track("", "", "2 Best Enemies - Unity (Original Mix).mp3"),
@@ -66,6 +66,11 @@ namespace MP3Player
         private void PreviousTrack(object sender, EventArgs e)
         {
             mediaPlayer.PreviousTrack();
+        }
+
+        public void Update()
+        {
+            //Insert code here to update GUI Interface with track information
         }
     }
 }
