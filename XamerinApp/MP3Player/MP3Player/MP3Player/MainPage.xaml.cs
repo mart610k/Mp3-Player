@@ -20,6 +20,7 @@ namespace MP3Player
             IPlayList playlist = new PlayList();
 
             playlist.AddTracks(new ITrack[]{
+                new Track("","","mixkit-facility-alarm-908.wav"),
                 new Track("", "", "2 Best Enemies - Unity (Original Mix).mp3"),
                 new Track("", "", "A Single Day - Approaching Nirvana.mp3"),
                 new Track("", "", "A-Lusion - Marked For Life.mp3"),

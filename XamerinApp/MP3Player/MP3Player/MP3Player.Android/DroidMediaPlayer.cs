@@ -3,6 +3,7 @@ using MP3Player.Droid;
 using Android.Media;
 using Android.Content.Res;
 using MP3Player.Classes;
+using System;
 
 [assembly: Dependency(typeof(DroidMediaPlayer))]
 
@@ -17,6 +18,7 @@ namespace MP3Player.Droid
         {
             player = new MediaPlayer();
             playlist = new PlayList();
+            player.Completion += On_Current_Track_Completion;
         }
         
         public void PlayPausePlayback()
@@ -34,6 +36,16 @@ namespace MP3Player.Droid
         public void SelectTrack(ITrack fileName)
         {
             PrepareForPlayback(fileName);
+        }
+
+        /// <summary>
+        /// Event for when currnet Track have finished playing
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void On_Current_Track_Completion(object sender, EventArgs e)
+        {
+            SkipTrack();
         }
 
         /// <summary>
@@ -62,7 +74,6 @@ namespace MP3Player.Droid
         public void SkipTrack()
         {
             SelectTrack(playlist.NextTrack());
-
             player.Start();
         }
 
