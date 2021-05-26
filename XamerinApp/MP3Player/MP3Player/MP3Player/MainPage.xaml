@@ -3,12 +3,72 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MP3Player.MainPage">
 
-    <StackLayout>
-        <Label x:Name="Text_Label" Text="Something here" FontSize="16" Padding="30,24,30,0">
 
-        </Label>
+    <Grid>
 
-        <Button Text="Test" Clicked="Button_Clicked"></Button>
-    </StackLayout>
+        
+        
+        <Grid VerticalOptions="End"  Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+            </Grid.RowDefinitions>
+
+
+            <Button Grid.Column="0"
+                    Text="Test"
+                    />
+
+            <Button Grid.Column="1"
+                    Text="Test" 
+                    />
+
+            <Button Grid.Column="2"
+                    Text="Play" Clicked="Button_Clicked"
+                    />
+
+            <Button Grid.Column="3"
+                    Text="Skip" Clicked="SkipTrack" 
+                    />
+
+
+            <Button Grid.Column="4"
+                    Text="Test" 
+                    />
+
+
+
+
+        </Grid>
+
+    </Grid>
+    
+   
+    
+    
+    <!--<StackLayout>
+
+        <StackLayout>
+            <Label x:Name="Text_Label" Text="Something here" FontSize="16" Padding="30,24,30,0">
+
+            </Label>
+
+            <Button Text="Test" Clicked="Button_Clicked"></Button>
+        </StackLayout>
+
+    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+            <Button Text="Hello"></Button>
+            <Button Text="Hello"></Button>
+            <Button Text="Hello"></Button>
+            <Button Text="Hello"></Button>
+            <Button Text="Hello"></Button>
+        </StackLayout>
+    </StackLayout>-->
 
 </ContentPage>

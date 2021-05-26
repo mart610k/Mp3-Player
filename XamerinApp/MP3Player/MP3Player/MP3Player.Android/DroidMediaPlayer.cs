@@ -2,6 +2,7 @@
 using MP3Player.Droid;
 using Android.Media;
 using Android.Content.Res;
+
 [assembly: Dependency(typeof(DroidMediaPlayer))]
 
 namespace MP3Player.Droid
@@ -11,11 +12,14 @@ namespace MP3Player.Droid
         MediaPlayer player;
         public AssetFileDescriptor CurrentlyPlaying { get; private set; }
 
+        IPlayList playlist;
+
         public string FileLocation { get; private set; }
 
         public DroidMediaPlayer()
         {
             player = new MediaPlayer();
+            playlist = new PlayList();
         }
         
         public void PlayPauseAudioFile()
@@ -41,6 +45,27 @@ namespace MP3Player.Droid
             player.SetDataSource(CurrentlyPlaying.FileDescriptor, CurrentlyPlaying.StartOffset, CurrentlyPlaying.Length);
 
             player.Prepare();
+        }
+
+        public void SelectPlayList(IPlayList playList)
+        {
+            playlist = playList;
+
+            player.Stop();
+            player.Reset();
+
+            CurrentlyPlaying = Android.App.Application.Context.Assets.OpenFd(playlist.NextTrack());
+
+            player.SetDataSource(CurrentlyPlaying.FileDescriptor, CurrentlyPlaying.StartOffset, CurrentlyPlaying.Length);
+
+            player.Prepare();
+        }
+
+        public void SkipTrack()
+        {
+            SelectTrack(playlist.NextTrack());
+
+            player.Start();
         }
     }
 }

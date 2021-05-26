@@ -8,10 +8,12 @@ namespace MP3Player
     {
         string FileLocation { get; }
 
-        //string Artist { get; }
-
         void SelectTrack(string fileName);
 
         void PlayPauseAudioFile();
+
+        void SelectPlayList(IPlayList playList);
+
+        void SkipTrack();
     }
 }
