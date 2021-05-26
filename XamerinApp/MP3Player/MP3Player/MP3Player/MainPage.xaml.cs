@@ -47,15 +47,24 @@ namespace MP3Player
                 //Text_Label.Text = mediaPlayer.FileLocation;
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        /// <summary>
+        /// Pause and start playback on the device
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PlayPausePlayback(object sender, EventArgs e)
         {
-
             mediaPlayer.PlayPausePlayback();
         }
 
         private void SkipTrack(object sender, EventArgs e)
         {
             mediaPlayer.SkipTrack();
+        }
+
+        private void PreviousTrack(object sender, EventArgs e)
+        {
+            mediaPlayer.PreviousTrack();
         }
     }
 }

@@ -26,11 +26,11 @@
                     />
 
             <Button Grid.Column="1"
-                    Text="Test" 
+                    Text="Prev"  Clicked="PreviousTrack"
                     />
 
             <Button Grid.Column="2"
-                    Text="Play" Clicked="Button_Clicked"
+                    Text="Play" Clicked="PlayPausePlayback"
                     />
 
             <Button Grid.Column="3"

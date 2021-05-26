@@ -10,12 +10,8 @@ namespace MP3Player.Droid
 {
     public class DroidMediaPlayer : IMediaPlayer
     {
-        MediaPlayer player;
-        public AssetFileDescriptor CurrentlyPlaying { get; private set; }
-
-        IPlayList playlist;
-
-        public string FileLocation { get; private set; }
+        private MediaPlayer player;
+        private IPlayList playlist;
 
         public DroidMediaPlayer()
         {
@@ -37,12 +33,21 @@ namespace MP3Player.Droid
 
         public void SelectTrack(ITrack fileName)
         {
+            PrepareForPlayback(fileName);
+        }
+
+        /// <summary>
+        /// Prepares the player for playback
+        /// </summary>
+        private void PrepareForPlayback(ITrack fileName)
+        {
+
             player.Stop();
             player.Reset();
 
-            CurrentlyPlaying = Android.App.Application.Context.Assets.OpenFd(fileName.LocalFileName);
+            AssetFileDescriptor currentlyPlaying = Android.App.Application.Context.Assets.OpenFd(fileName.LocalFileName);
 
-            player.SetDataSource(CurrentlyPlaying.FileDescriptor, CurrentlyPlaying.StartOffset, CurrentlyPlaying.Length);
+            player.SetDataSource(currentlyPlaying.FileDescriptor, currentlyPlaying.StartOffset, currentlyPlaying.Length);
 
             player.Prepare();
         }
@@ -51,14 +56,7 @@ namespace MP3Player.Droid
         {
             playlist = playList;
 
-            player.Stop();
-            player.Reset();
-
-            CurrentlyPlaying = Android.App.Application.Context.Assets.OpenFd(playlist.NextTrack().LocalFileName);
-
-            player.SetDataSource(CurrentlyPlaying.FileDescriptor, CurrentlyPlaying.StartOffset, CurrentlyPlaying.Length);
-
-            player.Prepare();
+            PrepareForPlayback(playlist.NextTrack());
         }
 
         public void SkipTrack()
@@ -68,21 +66,21 @@ namespace MP3Player.Droid
             player.Start();
         }
 
-        
-
         public void PreviousTrack()
         {
-            throw new System.NotImplementedException();
+            SelectTrack(playlist.PreviousTrack());
+            player.Start();
         }
 
         public void StopPlayback()
         {
-            throw new System.NotImplementedException();
+            player.Stop();
+            player.Reset();
         }
 
-        ITrack IMediaPlayer.CurrentlyPlaying()
+        public ITrack CurrentlyPlaying()
         {
-            throw new System.NotImplementedException();
+            return playlist.CurrentTrack();
         }
     }
 }

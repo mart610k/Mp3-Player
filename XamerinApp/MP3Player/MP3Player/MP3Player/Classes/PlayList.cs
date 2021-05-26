@@ -38,7 +38,13 @@ namespace MP3Player.Classes
 
         public ITrack PreviousTrack()
         {
-            throw new NotImplementedException();
+            currentTrack -= 1;
+            if (currentTrack < 0)
+            {
+                currentTrack = playList.Count - 1;
+            }
+
+            return playList[currentTrack];
         }
 
         public void RemoveTrack(ITrack track)
