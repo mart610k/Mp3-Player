@@ -34,43 +34,44 @@ namespace MP3Player.Droid
             }
         }
 
-        public void SelectTrack(ITrack fileName)
+        public void SelectTrack(ITrack track)
         {
-            PrepareForPlayback(fileName);
+            PrepareForPlayback(track);
         }
 
         /// <summary>
-        /// Event for when currnet Track have finished playing
+        /// Event for when current Track have finished playing
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void On_Current_Track_Completion(object sender, EventArgs e)
         {
             SkipTrack();
-            NotifyObserver();
         }
 
         /// <summary>
         /// Prepares the player for playback
         /// </summary>
-        private void PrepareForPlayback(ITrack fileName)
+        private void PrepareForPlayback(ITrack track)
         {
 
             player.Stop();
             player.Reset();
 
-            AssetFileDescriptor currentlyPlaying = Android.App.Application.Context.Assets.OpenFd(fileName.LocalFileName);
+            AssetFileDescriptor currentlyPlaying = Android.App.Application.Context.Assets.OpenFd(track.LocalFileName);
 
             player.SetDataSource(currentlyPlaying.FileDescriptor, currentlyPlaying.StartOffset, currentlyPlaying.Length);
 
             player.Prepare();
+            NotifyObserver();
+
         }
 
         public void SelectPlayList(IPlayList playList)
         {
             playlist = playList;
 
-            PrepareForPlayback(playlist.NextTrack());
+            SkipTrack();
         }
 
         public void SkipTrack()

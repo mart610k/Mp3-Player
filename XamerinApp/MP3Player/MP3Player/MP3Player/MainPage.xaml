@@ -6,7 +6,18 @@
 
     <Grid>
 
-        
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15"/>
+                <RowDefinition Height="15"/>
+
+
+                <RowDefinition Height="15"/>
+            </Grid.RowDefinitions>
+            <Label x:Name="TrackName" Text="Hello" Grid.Row="0" FontAttributes="Bold"/>
+            <Label x:Name="Artist" Text="Hello" Grid.Row="1"  FontAttributes="Bold"/>
+            <Label x:Name="LocalFileName" Text="Hello" Grid.Row="2"  FontAttributes="Bold"/>
+        </Grid>
         
         <Grid VerticalOptions="End"  Grid.Row="2">
             <Grid.ColumnDefinitions>

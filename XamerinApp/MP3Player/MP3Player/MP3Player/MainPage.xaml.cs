@@ -20,12 +20,12 @@ namespace MP3Player
             IPlayList playlist = new PlayList();
             mediaPlayer.RegisterObserver(this);
             playlist.AddTracks(new ITrack[]{
-                new Track("","","mixkit-facility-alarm-908.wav"),
-                new Track("", "", "2 Best Enemies - Unity (Original Mix).mp3"),
-                new Track("", "", "A Single Day - Approaching Nirvana.mp3"),
-                new Track("", "", "A-Lusion - Marked For Life.mp3"),
-                new Track("", "", "Acti & Darook MC - Kick My Brain.mp3"),
-                new Track("", "", "Activator - One I Love.mp3"),
+                new Track("facility-alarm-908","mixkit","mixkit-facility-alarm-908.wav"),
+                new Track("Unity (Original Mix)", "2 Best Enemies", "2 Best Enemies - Unity (Original Mix).mp3"),
+                new Track("A Single Day", "Approaching Nirvana", "A Single Day - Approaching Nirvana.mp3"),
+                new Track("Marked For Life", "A-Lusion", "A-Lusion - Marked For Life.mp3"),
+                new Track("Kick My Brain", "Acti & Darook MC", "Acti & Darook MC - Kick My Brain.mp3"),
+                new Track("One I Love", "Activator", "Activator - One I Love.mp3"),
                 new Track("", "", "Activator - Supersonic Bass.mp3"),
                 new Track("", "", "Alpha2 & Wildstylez - Atrocious (Original Mix).mp3"),
                 new Track("", "", "Alphaverb - Feel Good (Gentalica Remix).mp3"),
@@ -70,6 +70,10 @@ namespace MP3Player
 
         public void Update()
         {
+            ITrack currentTrack = mediaPlayer.CurrentlyPlaying();
+            TrackName.Text = currentTrack.TrackName;
+            Artist.Text = currentTrack.Artist;
+            LocalFileName.Text = currentTrack.LocalFileName;
             //Insert code here to update GUI Interface with track information
         }
     }
