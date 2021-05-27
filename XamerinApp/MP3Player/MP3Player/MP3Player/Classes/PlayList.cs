@@ -6,26 +6,26 @@ namespace MP3Player.Classes
 {
     public class PlayList : IPlayList
     {
-        List<ITrack> playList = new List<ITrack>();
+        List<ITrackSimple> playList = new List<ITrackSimple>();
         int currentTrack = -1;
 
 
-        public void AddTrack(ITrack track)
+        public void AddTrack(ITrackSimple track)
         {
             playList.Add(track);
         }
 
-        public void AddTracks(ITrack[] tracks)
+        public void AddTracks(ITrackSimple[] tracks)
         {
             playList.AddRange(tracks);
         }
 
-        public ITrack CurrentTrack()
+        public ITrackSimple CurrentTrack()
         {
             return playList[currentTrack];
         }
 
-        public ITrack NextTrack()
+        public ITrackSimple NextTrack()
         {
             currentTrack += 1;
             if (currentTrack > playList.Count - 1)
@@ -36,7 +36,7 @@ namespace MP3Player.Classes
             return playList[currentTrack];
         }
 
-        public ITrack PreviousTrack()
+        public ITrackSimple PreviousTrack()
         {
             currentTrack -= 1;
             if (currentTrack < 0)
@@ -47,7 +47,7 @@ namespace MP3Player.Classes
             return playList[currentTrack];
         }
 
-        public void RemoveTrack(ITrack track)
+        public void RemoveTrack(ITrackSimple track)
         {
             throw new NotImplementedException();
         }

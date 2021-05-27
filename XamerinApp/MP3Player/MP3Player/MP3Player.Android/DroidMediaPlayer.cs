@@ -40,7 +40,7 @@ namespace MP3Player.Droid
             }
         }
 
-        public void SelectTrack(ITrack track)
+        public void SelectTrack(ITrackSimple track)
         {
             PrepareForPlayback(track);
         }
@@ -58,7 +58,7 @@ namespace MP3Player.Droid
         /// <summary>
         /// Prepares the player for playback
         /// </summary>
-        private void PrepareForPlayback(ITrack track)
+        private void PrepareForPlayback(ITrackSimple track)
         {
             player.Stop();
             player.Reset();
@@ -95,7 +95,7 @@ namespace MP3Player.Droid
             player.Reset();
         }
 
-        public ITrack CurrentlyPlaying()
+        public ITrackSimple CurrentlyPlaying()
         {
             return playlist.CurrentTrack();
         }

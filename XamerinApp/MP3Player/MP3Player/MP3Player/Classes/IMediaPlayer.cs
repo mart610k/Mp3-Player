@@ -10,7 +10,7 @@ namespace MP3Player.Classes
         /// select track by filename
         /// </summary>
         /// <param name="fileName">Filename to select</param>
-        void SelectTrack(ITrack fileName);
+        void SelectTrack(ITrackSimple fileName);
 
         /// <summary>
         /// PLay and pause the currently playing track
@@ -43,7 +43,7 @@ namespace MP3Player.Classes
         /// Gets the currently playing track
         /// </summary>
         /// <returns>The track which is currently playing</returns>
-        ITrack CurrentlyPlaying();
+        ITrackSimple CurrentlyPlaying();
 
     }
 }

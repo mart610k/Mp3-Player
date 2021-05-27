@@ -77,10 +77,19 @@ namespace MP3Player
 
         public void Update()
         {
-            ITrack currentTrack = mediaPlayer.CurrentlyPlaying();
-            TrackName.Text = currentTrack.TrackName;
-            Artist.Text = currentTrack.Artist;
+            ITrackSimple currentTrack = mediaPlayer.CurrentlyPlaying();
             LocalFileName.Text = currentTrack.LocalFileName;
+            if(currentTrack is ITrack)
+            {
+                TrackName.Text = ((ITrack)currentTrack).TrackName;
+                Artist.Text = ((ITrack)currentTrack).Artist;
+            }
+            else
+            {
+                TrackName.Text = "--No data--";
+                Artist.Text = "--No data--";
+            }
+            
             //Insert code here to update GUI Interface with track information
         }
     }

@@ -16,11 +16,5 @@ namespace MP3Player.Classes
         /// Artist of the track
         /// </summary>
         string Artist { get; }
-
-        /// <summary>
-        /// The local file name of the file location
-        /// </summary>
-        string LocalFileName{ get; }
-
     }
 }
