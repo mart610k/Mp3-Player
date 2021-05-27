@@ -59,27 +59,4 @@
         </Grid>
 
     </Grid>
-    
-   
-    
-    
-    <!--<StackLayout>
-
-        <StackLayout>
-            <Label x:Name="Text_Label" Text="Something here" FontSize="16" Padding="30,24,30,0">
-
-            </Label>
-
-            <Button Text="Test" Clicked="Button_Clicked"></Button>
-        </StackLayout>
-
-    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-            <Button Text="Hello"></Button>
-            <Button Text="Hello"></Button>
-            <Button Text="Hello"></Button>
-            <Button Text="Hello"></Button>
-            <Button Text="Hello"></Button>
-        </StackLayout>
-    </StackLayout>-->
-
 </ContentPage>

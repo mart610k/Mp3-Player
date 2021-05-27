@@ -4,6 +4,8 @@ using Android.Media;
 using Android.Content.Res;
 using MP3Player.Classes;
 using System;
+using System.IO;
+using Android.Content;
 
 [assembly: Dependency(typeof(DroidMediaPlayer))]
 
@@ -14,11 +16,13 @@ namespace MP3Player.Droid
         private MediaPlayer player;
         private IPlayList playlist;
         private IMediaPlayerObserver observer = null;
+        private IFileService fileService = null;
 
-        public DroidMediaPlayer()
+        public DroidMediaPlayer(IPlayList playlist,IFileService fileService)
         {
             player = new MediaPlayer();
-            playlist = new PlayList();
+            this.playlist = playlist;
+            this.fileService = fileService;
             player.Completion += On_Current_Track_Completion;
         }
         
@@ -54,13 +58,10 @@ namespace MP3Player.Droid
         /// </summary>
         private void PrepareForPlayback(ITrack track)
         {
-
             player.Stop();
             player.Reset();
-
-            AssetFileDescriptor currentlyPlaying = Android.App.Application.Context.Assets.OpenFd(track.LocalFileName);
-
-            player.SetDataSource(currentlyPlaying.FileDescriptor, currentlyPlaying.StartOffset, currentlyPlaying.Length);
+            
+            player.SetDataSource(fileService.GetFullFilePath(track.LocalFileName));
 
             player.Prepare();
             NotifyObserver();
@@ -71,7 +72,7 @@ namespace MP3Player.Droid
         {
             playlist = playList;
 
-            SkipTrack();
+            PrepareForPlayback(playlist.NextTrack());
         }
 
         public void SkipTrack()
