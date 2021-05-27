@@ -13,5 +13,11 @@ namespace MP3Player.Classes
         /// <returns>full path to the file</returns>
         string GetFullFilePath(string localFilePath);
 
+
+        /// <summary>
+        /// Creates the folder the object have been instasiated with
+        /// </summary>
+        void CreateFolderLocationIfNotExist();
+
     }
 }

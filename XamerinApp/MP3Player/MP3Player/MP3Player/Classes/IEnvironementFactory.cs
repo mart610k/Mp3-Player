@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MP3Player.Classes
 {
-    public interface IEnvironementFactory
+    public interface IEnvironmentFactory
     {
        /// <summary>
        /// Creates a media player for the Device in use

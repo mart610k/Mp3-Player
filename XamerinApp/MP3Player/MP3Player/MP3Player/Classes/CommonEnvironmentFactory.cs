@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MP3Player.Classes
 {
-    public abstract class CommonEnvironmentFactory : IEnvironementFactory
+    public abstract class CommonEnvironmentFactory : IEnvironmentFactory
     {
         public IPlayList CreateEmptyPlayList()
         {
@@ -12,7 +12,6 @@ namespace MP3Player.Classes
         }
 
         public abstract IFileService CreateFileServicePublicAccess(string[] paths);
-
         public abstract IMediaPlayer CreateMediaPlayer(IFileService fileService, IPlayList playList);
 
         public ITrack CreateTrack(string trackName, string artist, string filename)

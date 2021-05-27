@@ -24,6 +24,8 @@ namespace MP3Player.Droid
             this.playlist = playlist;
             this.fileService = fileService;
             player.Completion += On_Current_Track_Completion;
+
+            fileService.CreateFolderLocationIfNotExist();
         }
         
         public void PlayPausePlayback()

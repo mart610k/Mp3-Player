@@ -27,5 +27,14 @@ namespace MP3Player.Droid
         {
             return Path.Combine(basePath, localFilePath);
         }
+
+        public void CreateFolderLocationIfNotExist()
+        {
+            if (!Directory.Exists(basePath))
+            {
+                Directory.CreateDirectory(basePath);
+            }
+                
+        }
     }
 }
