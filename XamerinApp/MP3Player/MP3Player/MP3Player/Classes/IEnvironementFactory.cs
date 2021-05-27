@@ -30,10 +30,10 @@ namespace MP3Player.Classes
         ITrack CreateTrack(string trackName,string artist,string filename);
 
         /// <summary>
-        /// Creates a device specific file service.
+        /// Creates a device specific file service using the public media Folder.
         /// </summary>
         /// <param name="paths">the path leading up to the location</param>
         /// <returns>A file service with the paths defined</returns>
-        IFileService CreateFileService(string[] paths);
+        IFileService CreateFileServicePublicAccess(string[] paths);
     }
 }

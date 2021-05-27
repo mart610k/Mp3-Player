@@ -11,43 +11,38 @@ namespace MP3Player
 {
     public partial class MainPage : ContentPage,IMediaPlayerObserver
     {
-        IMediaPlayer mediaPlayer = DependencyService.Get<IMediaPlayer>();
+        IMediaPlayer mediaPlayer;
 
         IEnvironementFactory environementFactory = DependencyService.Get<IEnvironementFactory>();
 
         public MainPage()
         {
             InitializeComponent();
-            
-            IPlayList playlist = new PlayList();
+
+            IPlayList playList = environementFactory.CreateEmptyPlayList();
+            playList.AddTrack(environementFactory.CreateTrack("Unity (Original Mix)", "2 Best Enemies", "2 Best Enemies - Unity (Original Mix).mp3"));
+            playList.AddTrack(environementFactory.CreateTrack("Marked For Life", "A-Lusion", "A-Lusion - Marked For Life.mp3"));
+            playList.AddTrack(environementFactory.CreateTrack("Kick My Brain", "Acti & Darook MC", "Acti & Darook MC - Kick My Brain.mp3"));
+            playList.AddTrack(environementFactory.CreateTrack("One I Love", "Activator", "Activator - One I Love.mp3"));
+            playList.AddTrack(environementFactory.CreateTrack("Supersonic Bass", "Activator", "Activator - Supersonic Bass.mp3"));
+            playList.AddTrack(environementFactory.CreateTrack("Atrocious (Original Mix)", "Alpha2 & Wildstylez", "Alpha2 & Wildstylez - Atrocious (Original Mix).mp3"));
+            playList.AddTrack(environementFactory.CreateTrack("Feel Good (Gentalica Remix)", "Alphaverb", "Alphaverb - Feel Good (Gentalica Remix).mp3"));
+            playList.AddTrack(environementFactory.CreateTrack("Rockin da Rework (Extended Mix)", "Alphaverb", "Alphaverb - Rockin da Rework (Extended Mix).mp3"));
+            playList.AddTrack(environementFactory.CreateTrack("The Otherside  (Extended Album Mix)", "Alphaverb", "Alphaverb - The Otherside  (Extended Album Mix).mp3"));
+            playList.AddTrack(environementFactory.CreateTrack("Thunderstyle (Remastered Club Mix)", "Alphaverb", "Alphaverb - Thunderstyle (Remastered Club Mix).mp3"));
+            playList.AddTrack(environementFactory.CreateTrack("Rock the Dancefloor", "Ambassador Inc", "Ambassador Inc - Rock the Dancefloor.mp3"));
+            playList.AddTrack(environementFactory.CreateTrack("Silence", "Ambassador Inc", "Ambassador Inc - Silence.mp3"));
+            playList.AddTrack(environementFactory.CreateTrack("The Hardstyle Nation", "Ambassador Inc", "Ambassador Inc - The Hardstyle Nation.mp3"));
+            playList.AddTrack(environementFactory.CreateTrack("Cause & Effect (Original Mix)", "Anderson T", "Anderson T  - Cause & Effect (Original Mix).mp3"));
+            playList.AddTrack(environementFactory.CreateTrack("Rebellion", "B-Twinz", "B-Twinz - Rebellion.mp3"));
+            playList.AddTrack(environementFactory.CreateTrack("Real Street Shit (Original Mix)", "Brian NRG", "Brian NRG - Real Street Shit (Original Mix).mp3"));
+            playList.AddTrack(environementFactory.CreateTrack("Club Bizarre (Headhunterz & Noisecontrollers Remix)", "Brooklyn Bounce", "Brooklyn Bounce - Club Bizarre (Headhunterz & Noisecontrollers Remix).mp3"));
+            playList.AddTrack(environementFactory.CreateTrack("Heavyweight", "Catatonic Overload", "Catatonic Overload  - Heavyweight.mp3"));
+            playList.AddTrack(environementFactory.CreateTrack("Paralyzed", "Catatonic Overload", "Catatonic Overload  - Paralyzed.mp3"));
+
+            mediaPlayer  = environementFactory.CreateMediaPlayer(environementFactory.CreateFileServicePublicAccess(new string[] { "MP3Player"}), environementFactory.CreateEmptyPlayList());
             mediaPlayer.RegisterObserver(this);
-            playlist.AddTracks(new ITrack[]{
-                //new Track("facility-alarm-908","mixkit","mixkit-facility-alarm-908.wav"),
-                new Track("Unity (Original Mix)", "2 Best Enemies", "2 Best Enemies - Unity (Original Mix).mp3"),
-                //new Track("A Single Day", "Approaching Nirvana", "A Single Day - Approaching Nirvana.mp3"),
-                new Track("Marked For Life", "A-Lusion", "A-Lusion - Marked For Life.mp3"),
-                new Track("Kick My Brain", "Acti & Darook MC", "Acti & Darook MC - Kick My Brain.mp3"),
-                new Track("One I Love", "Activator", "Activator - One I Love.mp3"),
-                new Track("Supersonic Bass", "Activator", "Activator - Supersonic Bass.mp3"),
-                new Track("Atrocious (Original Mix)", "Alpha2 & Wildstylez", "Alpha2 & Wildstylez - Atrocious (Original Mix).mp3"),
-                new Track("Feel Good (Gentalica Remix)", "Alphaverb", "Alphaverb - Feel Good (Gentalica Remix).mp3"),
-                new Track("Rockin da Rework (Extended Mix)", "Alphaverb", "Alphaverb - Rockin da Rework (Extended Mix).mp3"),
-                new Track("The Otherside  (Extended Album Mix)", "Alphaverb", "Alphaverb - The Otherside  (Extended Album Mix).mp3"),
-                new Track("Thunderstyle (Remastered Club Mix)", "Alphaverb", "Alphaverb - Thunderstyle (Remastered Club Mix).mp3"),
-                new Track("Rock the Dancefloor", "Ambassador Inc", "Ambassador Inc - Rock the Dancefloor.mp3"),
-                new Track("Silence", "Ambassador Inc", "Ambassador Inc - Silence.mp3"),
-                new Track("The Hardstyle Nation", "Ambassador Inc", "Ambassador Inc - The Hardstyle Nation.mp3"),
-                new Track("Cause & Effect (Original Mix)", "Anderson T", "Anderson T  - Cause & Effect (Original Mix).mp3"),
-                new Track("Rebellion", "B-Twinz", "B-Twinz - Rebellion.mp3"),
-                new Track("Real Street Shit (Original Mix)", "Brian NRG", "Brian NRG - Real Street Shit (Original Mix).mp3"),
-                new Track("Club Bizarre (Headhunterz & Noisecontrollers Remix)", "Brooklyn Bounce", "Brooklyn Bounce - Club Bizarre (Headhunterz & Noisecontrollers Remix).mp3"),
-                new Track("Heavyweight", "Catatonic Overload", "Catatonic Overload  - Heavyweight.mp3"),
-                new Track("Paralyzed", "Catatonic Overload", "Catatonic Overload  - Paralyzed.mp3")
-            });
-
-            mediaPlayer.SelectPlayList(playlist);
-
-                //Text_Label.Text = mediaPlayer.FileLocation;
+            mediaPlayer.SelectPlayList(playList);
         }
 
         /// <summary>

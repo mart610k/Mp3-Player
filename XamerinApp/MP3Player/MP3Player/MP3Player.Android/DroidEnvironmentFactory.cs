@@ -14,7 +14,7 @@ namespace MP3Player.Droid
 
         }
 
-        public override IFileService CreateFileService(string[] paths)
+        public override IFileService CreateFileServicePublicAccess(string[] paths)
         {
             return new DroidFileService(paths);
         }
