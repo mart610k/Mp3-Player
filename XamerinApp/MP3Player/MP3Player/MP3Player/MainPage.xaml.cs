@@ -11,10 +11,9 @@ namespace MP3Player
     public partial class MainPage : ContentPage,IMediaPlayerObserver
     {
         IMediaPlayer mediaPlayer;
-
         IEnvironmentFactory environmentFactory = DependencyService.Get<IEnvironmentFactory>();
 
-        
+
         public MainPage()
         {
             InitializeComponent();
@@ -33,6 +32,8 @@ namespace MP3Player
                 MessagingCenter.Unsubscribe<IMessagePublisher>(this, "PermissionFileReadWriteFailed");
             }
             );
+            PlayPauseButtonImgButton.Source = ImageResourceExtension.GetImageSource("MP3Player.Images.play_button.png");
+
             //environmentFactory.GetPermissions();
             //if (!)
             //{
