@@ -23,11 +23,12 @@ namespace MP3Player
                   InitPlayer();
 
                   MessagingCenter.Unsubscribe<IMessagePublisher>(this, "PermissionFileReadWrite");
+                  MessagingCenter.Unsubscribe<IMessagePublisher>(this, "PermissionFileReadWriteFailed");
               }
             );
             MessagingCenter.Subscribe<IMessagePublisher>(this, "PermissionFileReadWriteFailed", (sender) =>
             {
-
+                environmentFactory.GetCloseableApplication().CloseApplication();
                 
                 MessagingCenter.Unsubscribe<IMessagePublisher>(this, "PermissionFileReadWriteFailed");
             }

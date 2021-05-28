@@ -38,7 +38,22 @@ namespace MP3Player.Droid
 
             if (PermissionFileReadWriteCode == requestCode)
             {
-                MessagingCenter.Send<IMessagePublisher>(this, "PermissionFileReadWrite");
+                bool allRightsApproved = true;
+                for (int i = 0; i < grantResults.Length; i++)
+                {
+                    if (Permission.Denied == grantResults[i])
+                    {
+                        allRightsApproved = false;
+                    }
+                }
+                if (allRightsApproved)
+                {
+                    MessagingCenter.Send<IMessagePublisher>(this, "PermissionFileReadWrite");
+                }
+                else
+                {
+                    MessagingCenter.Send<IMessagePublisher>(this, "PermissionFileReadWriteFailed");
+                }
             }
         }
     }
