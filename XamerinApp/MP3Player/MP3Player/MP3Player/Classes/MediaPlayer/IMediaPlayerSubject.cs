@@ -1,4 +1,4 @@
-﻿namespace MP3Player.Classes
+﻿namespace MP3Player.Classes.MediaPlayer
 {
     public interface IMediaPlayerSubject
     {

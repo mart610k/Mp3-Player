@@ -1,4 +1,4 @@
-﻿namespace MP3Player.Classes
+﻿namespace MP3Player.Classes.Tracks
 {
     /// <summary>
     /// This is when only the file location is known

@@ -1,6 +1,10 @@
 ﻿using System;
 using Xamarin.Forms;
 using MP3Player.Classes;
+using MP3Player.Classes.MediaPlayer;
+using MP3Player.Classes.Tracks;
+using Xamarin.Essentials;
+using System.Threading.Tasks;
 
 namespace MP3Player
 {
@@ -10,9 +14,25 @@ namespace MP3Player
 
         IEnvironmentFactory environmentFactory = DependencyService.Get<IEnvironmentFactory>();
 
+        
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// Pause and start playback on the device
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PlayPausePlayback(object sender, EventArgs e)
+        {
+            mediaPlayer.PlayPausePlayback();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
 
             IPlayList playList = environmentFactory.CreateEmptyPlayList();
             playList.AddTrack(environmentFactory.CreateTrack("Unity (Original Mix)", "2 Best Enemies", "2 Best Enemies - Unity (Original Mix).mp3"));
@@ -35,19 +55,10 @@ namespace MP3Player
             playList.AddTrack(environmentFactory.CreateTrack("Heavyweight", "Catatonic Overload", "Catatonic Overload  - Heavyweight.mp3"));
             playList.AddTrack(environmentFactory.CreateTrack("Paralyzed", "Catatonic Overload", "Catatonic Overload  - Paralyzed.mp3"));
 
-            mediaPlayer  = environmentFactory.CreateMediaPlayer(environmentFactory.CreateFileServicePublicAccess(new string[] { "MP3Player"}), environmentFactory.CreateEmptyPlayList());
+            mediaPlayer = environmentFactory.CreateMediaPlayer(environmentFactory.CreateFileServicePublicAccess(new string[] { "MP3Player" }), environmentFactory.CreateEmptyPlayList());
             mediaPlayer.RegisterObserver(this);
             mediaPlayer.SelectPlayList(playList);
-        }
 
-        /// <summary>
-        /// Pause and start playback on the device
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void PlayPausePlayback(object sender, EventArgs e)
-        {
-            mediaPlayer.PlayPausePlayback();
         }
 
         /// <summary>

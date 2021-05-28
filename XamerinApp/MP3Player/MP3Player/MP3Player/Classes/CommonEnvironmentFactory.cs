@@ -1,4 +1,7 @@
-﻿namespace MP3Player.Classes
+﻿using MP3Player.Classes.MediaPlayer;
+using MP3Player.Classes.Tracks;
+
+namespace MP3Player.Classes
 {
     public abstract class CommonEnvironmentFactory : IEnvironmentFactory
     {
@@ -10,9 +13,14 @@
         public abstract IFileService CreateFileServicePublicAccess(string[] paths);
         public abstract IMediaPlayer CreateMediaPlayer(IFileService fileService, IPlayList playList);
 
-        public ITrack CreateTrack(string trackName, string artist, string filename)
+        public ITrackSimple CreateTrack(string trackName, string artist, string filename)
         {
             return new Track(trackName, artist, filename);
+        }
+
+        public ITrackSimple CreateTrack(string filePath)
+        {
+            return new TrackSimple(filePath);
         }
     }
 }

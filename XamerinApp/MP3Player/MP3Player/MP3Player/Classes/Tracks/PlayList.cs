@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MP3Player.Classes
+namespace MP3Player.Classes.Tracks
 {
     public class PlayList : IPlayList
     {

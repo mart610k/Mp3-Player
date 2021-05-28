@@ -1,6 +1,8 @@
 ﻿using MP3Player.Classes;
 using MP3Player.Droid;
 using Xamarin.Forms;
+using MP3Player.Classes.MediaPlayer;
+using MP3Player.Classes.Tracks;
 
 [assembly: Dependency(typeof(DroidEnvironmentFactory))]
 

@@ -1,4 +1,4 @@
-﻿namespace MP3Player.Classes
+﻿namespace MP3Player.Classes.Tracks
 {
     public interface IPlayList
     {

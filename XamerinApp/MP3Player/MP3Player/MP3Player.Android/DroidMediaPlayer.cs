@@ -3,6 +3,8 @@ using MP3Player.Droid;
 using Android.Media;
 using MP3Player.Classes;
 using System;
+using MP3Player.Classes.MediaPlayer;
+using MP3Player.Classes.Tracks;
 
 [assembly: Dependency(typeof(DroidMediaPlayer))]
 

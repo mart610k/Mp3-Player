@@ -1,4 +1,7 @@
-﻿namespace MP3Player.Classes
+﻿using MP3Player.Classes.MediaPlayer;
+using MP3Player.Classes.Tracks;
+
+namespace MP3Player.Classes
 {
     public interface IEnvironmentFactory
     {
@@ -23,7 +26,14 @@
         /// <param name="artist">artist</param>
         /// <param name="filename">Filename on the device</param>
         /// <returns>Track with the information</returns>
-        ITrack CreateTrack(string trackName,string artist,string filename);
+        ITrackSimple CreateTrack(string trackName,string artist,string filename);
+
+        /// <summary>
+        /// Creates i track simple based on a file only
+        /// </summary>
+        /// <param name="filePath">the local file path</param>
+        /// <returns>a simple track only consisting of filepath</returns>
+        ITrackSimple CreateTrack(string filePath);
 
         /// <summary>
         /// Creates a device specific file service using the public media Folder.
