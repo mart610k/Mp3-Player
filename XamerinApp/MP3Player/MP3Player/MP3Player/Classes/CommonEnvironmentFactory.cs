@@ -22,5 +22,7 @@ namespace MP3Player.Classes
         {
             return new TrackSimple(filePath);
         }
+
+        public abstract ICloseableApplication GetCloseableApplication();
     }
 }

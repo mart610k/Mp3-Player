@@ -18,6 +18,25 @@ namespace MP3Player
         public MainPage()
         {
             InitializeComponent();
+            MessagingCenter.Subscribe<IMessagePublisher>(this, "PermissionFileReadWrite", (sender) =>
+              {
+                  InitPlayer();
+
+                  MessagingCenter.Unsubscribe<IMessagePublisher>(this, "PermissionFileReadWrite");
+              }
+            );
+            MessagingCenter.Subscribe<IMessagePublisher>(this, "PermissionFileReadWriteFailed", (sender) =>
+            {
+
+                
+                MessagingCenter.Unsubscribe<IMessagePublisher>(this, "PermissionFileReadWriteFailed");
+            }
+            );
+            //environmentFactory.GetPermissions();
+            //if (!)
+            //{
+
+            //}
         }
 
         /// <summary>
@@ -30,7 +49,7 @@ namespace MP3Player
             mediaPlayer.PlayPausePlayback();
         }
 
-        protected override void OnAppearing()
+        private void InitPlayer()
         {
             base.OnAppearing();
 

@@ -10,6 +10,8 @@ namespace MP3Player.Droid
 {
     public class DroidEnvironmentFactory : CommonEnvironmentFactory
     {
+
+
         public DroidEnvironmentFactory()
         {
 
@@ -23,6 +25,11 @@ namespace MP3Player.Droid
         public override IMediaPlayer CreateMediaPlayer(IFileService fileService, IPlayList playList)
         {
             return new DroidMediaPlayer(playList, fileService);
+        }
+
+        public override ICloseableApplication GetCloseableApplication()
+        {
+            return new DroidCloseApplication();
         }
     }
 }

@@ -41,5 +41,12 @@ namespace MP3Player.Classes
         /// <param name="paths">the path leading up to the location</param>
         /// <returns>A file service with the paths defined</returns>
         IFileService CreateFileServicePublicAccess(string[] paths);
+
+
+        /// <summary>
+        /// Gets the device specific closeable application
+        /// </summary>
+        /// <returns>Returns a specific implementation to close the application</returns>
+        ICloseableApplication GetCloseableApplication();
     }
 }

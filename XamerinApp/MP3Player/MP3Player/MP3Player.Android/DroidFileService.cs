@@ -1,6 +1,5 @@
 ﻿using MP3Player.Classes;
 using System.IO;
-using MP3Player.Classes.MediaPlayer;
 using MP3Player.Classes.Tracks;
 
 namespace MP3Player.Droid
