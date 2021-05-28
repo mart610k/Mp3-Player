@@ -33,7 +33,8 @@ namespace MP3Player
             }
             );
             PlayPauseButtonImgButton.Source = ImageResourceExtension.GetImageSource("MP3Player.Images.play_button.png");
-
+            SkipButtonImgButton.Source = ImageResourceExtension.GetImageSource("MP3Player.Images.skip_button.png");
+            PreviousButtonImgButton.Source = ImageResourceExtension.GetImageSource("MP3Player.Images.previous_button.png");
             //environmentFactory.GetPermissions();
             //if (!)
             //{

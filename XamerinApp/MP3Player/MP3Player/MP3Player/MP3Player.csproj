@@ -11,6 +11,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\previous_button.png" />
+    <None Remove="Images\skip_button.png" />
     <None Remove="play_button.png" />
   </ItemGroup>
 
@@ -21,6 +23,8 @@
     <EmbeddedResource Include="Images\play_button.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Images\previous_button.png" />
+    <EmbeddedResource Include="Images\skip_button.png" />
   </ItemGroup>
 
   <ItemGroup>
