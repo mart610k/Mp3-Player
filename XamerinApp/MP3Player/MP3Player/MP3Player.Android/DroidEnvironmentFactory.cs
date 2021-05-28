@@ -1,6 +1,5 @@
 ﻿using MP3Player.Classes;
 using MP3Player.Droid;
-
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(DroidEnvironmentFactory))]

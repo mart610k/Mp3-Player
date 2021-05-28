@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MP3Player.Classes
+﻿namespace MP3Player.Classes
 {
     public class Track : TrackSimple, ITrack
     {

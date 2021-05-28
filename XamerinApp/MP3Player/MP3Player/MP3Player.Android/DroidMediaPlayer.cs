@@ -1,11 +1,8 @@
 ﻿using Xamarin.Forms;
 using MP3Player.Droid;
 using Android.Media;
-using Android.Content.Res;
 using MP3Player.Classes;
 using System;
-using System.IO;
-using Android.Content;
 
 [assembly: Dependency(typeof(DroidMediaPlayer))]
 
