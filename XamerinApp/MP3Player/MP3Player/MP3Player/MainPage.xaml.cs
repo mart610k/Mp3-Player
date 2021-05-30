@@ -21,15 +21,12 @@ namespace MP3Player
               {
                   InitPlayer();
 
-                  MessagingCenter.Unsubscribe<IMessagePublisher>(this, "PermissionFileReadWrite");
-                  MessagingCenter.Unsubscribe<IMessagePublisher>(this, "PermissionFileReadWriteFailed");
               }
             );
             MessagingCenter.Subscribe<IMessagePublisher>(this, "PermissionFileReadWriteFailed", (sender) =>
             {
                 environmentFactory.GetCloseableApplication().CloseApplication();
                 
-                MessagingCenter.Unsubscribe<IMessagePublisher>(this, "PermissionFileReadWriteFailed");
             }
             );
             PlayPauseButtonImgButton.Source = ImageResourceExtension.GetImageSource("MP3Player.Images.play_button.png");
@@ -77,7 +74,7 @@ namespace MP3Player
             playList.AddTrack(environmentFactory.CreateTrack("Heavyweight", "Catatonic Overload", "Catatonic Overload  - Heavyweight.mp3"));
             playList.AddTrack(environmentFactory.CreateTrack("Paralyzed", "Catatonic Overload", "Catatonic Overload  - Paralyzed.mp3"));
 
-            mediaPlayer = environmentFactory.CreateMediaPlayer(environmentFactory.CreateFileServicePublicAccess(new string[] { "MP3Player" }), environmentFactory.CreateEmptyPlayList());
+            mediaPlayer = environmentFactory.CreateMediaPlayer(environmentFactory.CreateFileServicePublicAccess("MP3Player"), environmentFactory.CreateEmptyPlayList());
             mediaPlayer.RegisterObserver(this);
             mediaPlayer.SelectPlayList(playList);
 

@@ -10,7 +10,8 @@ namespace MP3Player.Classes
             return new PlayList();
         }
 
-        public abstract IFileService CreateFileServicePublicAccess(string[] paths);
+        public abstract IFileService CreateFileServiceCustomPath(string[] paths);
+        public abstract IFileService CreateFileServicePublicAccess(string path);
         public abstract IMediaPlayer CreateMediaPlayer(IFileService fileService, IPlayList playList);
 
         public ITrackSimple CreateTrack(string trackName, string artist, string filename)

@@ -1,6 +1,7 @@
 ﻿using MP3Player.Classes;
 using System.IO;
 using MP3Player.Classes.Tracks;
+using System;
 
 namespace MP3Player.Droid
 {
@@ -8,10 +9,25 @@ namespace MP3Player.Droid
     {
         private string basePath;
 
+        /// <summary>
+        /// Gets the public external folder of the android device which gives the location of the folder based on the location passed in
+        /// </summary>
+        /// <param name="path"></param>
+        public DroidFileService(string path)
+        {
+            //basePath = Path.Combine(Android.OS.Environment.ExternalStorageDirectory.ToString(), Android.OS.Environment.DirectoryMusic, path);
+            Console.WriteLine("PATH-1: " + Path.Combine(Android.OS.Environment.ExternalStorageDirectory.ToString(), Android.OS.Environment.DirectoryMusic, path));
+            Console.WriteLine("PATH-2: " + Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryMusic).ToString(),path));
+            basePath = Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryMusic).ToString(),path);
+        }
 
+        /// <summary>
+        /// Gets a fully defined path to the location of the folder
+        /// </summary>
+        /// <param name="paths">full path as defined.</param>
         public DroidFileService(string[] paths)
         {
-            basePath = Path.Combine(Android.OS.Environment.ExternalStorageDirectory.ToString(), Android.OS.Environment.DirectoryMusic, Path.Combine(paths));
+            basePath = Path.Combine(paths);
         }
 
         public string GetFullFilePath(string localFilePath)

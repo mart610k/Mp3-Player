@@ -6,12 +6,15 @@ using Android;
 using System;
 using Xamarin.Forms;
 using MP3Player.Classes;
+using Android.Content;
 
 namespace MP3Player.Droid
 {
     [Activity(Label = "MP3Player", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize )]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity, IMessagePublisher
     {
+        static Context context;
+
         readonly string[] PermissionFileReadWrite =
         {
             Manifest.Permission.ReadExternalStorage,
@@ -27,8 +30,9 @@ namespace MP3Player.Droid
             RequestPermissions(PermissionFileReadWrite, PermissionFileReadWriteCode);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
-           
-            
+
+
+            context = this; 
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
@@ -55,6 +59,10 @@ namespace MP3Player.Droid
                     MessagingCenter.Send<IMessagePublisher>(this, "PermissionFileReadWriteFailed");
                 }
             }
+        }
+        public static Context GetAndroidContext()
+        {
+            return context;
         }
     }
 }
