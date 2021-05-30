@@ -2,6 +2,8 @@
 using System.IO;
 using MP3Player.Classes.Tracks;
 using System;
+using System.Collections.Generic;
+using System.Runtime.Remoting.Contexts;
 
 namespace MP3Player.Droid
 {
@@ -13,12 +15,36 @@ namespace MP3Player.Droid
         /// Gets the public external folder of the android device which gives the location of the folder based on the location passed in
         /// </summary>
         /// <param name="path"></param>
-        public DroidFileService(string path)
+        public DroidFileService(string path, bool preferExternalStorage = true)
         {
-            //basePath = Path.Combine(Android.OS.Environment.ExternalStorageDirectory.ToString(), Android.OS.Environment.DirectoryMusic, path);
-            Console.WriteLine("PATH-1: " + Path.Combine(Android.OS.Environment.ExternalStorageDirectory.ToString(), Android.OS.Environment.DirectoryMusic, path));
-            Console.WriteLine("PATH-2: " + Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryMusic).ToString(),path));
-            basePath = Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryMusic).ToString(),path);
+            string[] directories = GetRootStorageLocations();
+            ////TODO: This is hardcoded for now to make way for better testing.
+            if (directories.Length == 1)
+            {
+                basePath = Path.Combine(directories[0],path);
+            }
+            else if (preferExternalStorage)
+            {
+                basePath = Path.Combine(directories[1], path);
+            }
+            else
+            {
+                basePath = Path.Combine(directories[0], path);
+            }
+
+            Console.WriteLine(basePath);
+            CreateFolderLocationIfNotExist();
+        }
+        
+
+        private string[] GetRootStorageLocations()
+        {
+            List<string> directories = new List<string>();
+            foreach (string dir in MainActivity.GetAndroidContext().GetExternalFilesDirs(null))
+            {
+                directories.Add(dir);
+            }
+            return directories.ToArray();
         }
 
         /// <summary>
