@@ -63,7 +63,8 @@
 
 
             <Button Grid.Column="4"
-                    Text="Test" 
+                    Text="NVG"
+                    Clicked="NavigateToView"
                     />
 
 

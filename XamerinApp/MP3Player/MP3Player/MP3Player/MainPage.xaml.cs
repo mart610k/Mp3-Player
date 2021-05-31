@@ -100,6 +100,14 @@ namespace MP3Player
             mediaPlayer.PreviousTrack();
         }
 
+
+        private async void NavigateToView(object sender, EventArgs e)
+        {
+            var nextPage = new PlaylistView();
+            await Navigation.PushAsync(nextPage);
+        }
+        
+
         public void Update()
         {
             ITrackSimple currentTrack = mediaPlayer.CurrentlyPlaying();
