@@ -17,6 +17,7 @@ namespace MP3Player.Droid
         /// <param name="path"></param>
         public DroidFileService(string path, bool preferExternalStorage = true)
         {
+            
             string[] directories = GetRootStorageLocations();
             ////TODO: This is hardcoded for now to make way for better testing.
             if (directories.Length == 1)
@@ -72,7 +73,8 @@ namespace MP3Player.Droid
 
         public string[] GetAllFilesWithExtension(string fileExtension)
         {
-            return Directory.GetFiles(basePath, fileExtension, SearchOption.AllDirectories);
+            Console.WriteLine(basePath);
+            return Directory.GetFiles(basePath, "*."+ fileExtension,SearchOption.AllDirectories);
         }
 
         public string GetFileExtension(string filePath)

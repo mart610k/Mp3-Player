@@ -2,23 +2,25 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MP3Player"
-             x:Class="MP3Player.MainPage">
-
+             x:Class="MP3Player.MainPage"
+             NavigationPage.HasNavigationBar="false">
 
     <Grid>
-
+        
         <Grid Grid.Row="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="15"/>
                 <RowDefinition Height="15"/>
                 <RowDefinition Height="15"/>
             </Grid.RowDefinitions>
-            <Label x:Name="TrackName" Text="--No data--" Grid.Row="0" FontAttributes="Bold"/>
-            <Label x:Name="Artist" Text="--No data--" Grid.Row="1"  FontAttributes="Bold"/>
-            <Label x:Name="LocalFileName" Text="--No data--" Grid.Row="2"  FontAttributes="Bold"/>
+            <BoxView BackgroundColor="Black" Grid.RowSpan="3"/>
+            <Label x:Name="TrackName" Text="-No data-" Grid.Row="0" FontAttributes="Bold" TextColor="White" BackgroundColor="Transparent"/>
+            <Label x:Name="Artist" Text="-No data-" Grid.Row="1" TextColor="White"  FontAttributes="Bold"/>
+            <Label x:Name="LocalFileName" Text="-No data-" Grid.Row="2" TextColor="White"   FontAttributes="Bold"/>
         </Grid>
 
         <Grid Grid.Row="1">
+            <BoxView BackgroundColor="AliceBlue" />
         </Grid>
         
         <Grid VerticalOptions="End"  Grid.Row="2">
@@ -35,7 +37,7 @@
 
 
             <Button Grid.Column="0"
-                    Text="Test"
+                    Text="Tracks"
                     />
 
             <ImageButton Grid.Column="1"
@@ -63,8 +65,8 @@
 
 
             <Button Grid.Column="4"
-                    Text="NVG"
-                    Clicked="NavigateToView"
+                    Text="Play List"
+                    Clicked="NavigateToPlayListView"
                     />
 
 
