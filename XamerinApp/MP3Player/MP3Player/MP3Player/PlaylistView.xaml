@@ -9,7 +9,7 @@
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.ContextActions>
-                            <MenuItem Clicked="SelectPlayList" Text="Select"
+                            <MenuItem Clicked="EditPlayList" Text="Edit"
                                       CommandParameter="{Binding .}">
 
                             </MenuItem>

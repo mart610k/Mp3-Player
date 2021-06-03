@@ -73,6 +73,25 @@ namespace MP3Player
             base.OnAppearing();
         }
 
+        /// <summary>
+        /// Navigates to the Page where editing a playlist is possible.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void EditPlayList(object sender, EventArgs e)
+        {
+            if (sender is MenuItem)
+            {
+                MenuItem mi = (MenuItem)sender;
+                Console.WriteLine(mi.CommandParameter);
+                if (mi.CommandParameter is IPlayList)
+                {
+                    selectedPLaylist = (IPlayList)mi.CommandParameter;
+                    await Navigation.PushAsync(new EditPlaylist(selectedPLaylist));
+                }
+            }
+            
+        }
 
         /// <summary>
         /// Triggers the selection and sends message back to Main page on which track is selected
@@ -119,9 +138,14 @@ namespace MP3Player
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void AddNewPlayList(object sender, EventArgs e)
+        private async void AddNewPlayList(object sender, EventArgs e)
         {
-            PlayList.Add(environmentFactory.CreateEmptyPlayList("New"));
+            string result = await DisplayPromptAsync("Create Playlist", "Type playlist name","Create","Cancel","New Playlist");
+
+            if(result != null)
+            {
+                PlayList.Add(environmentFactory.CreateEmptyPlayList(result));
+            }
         }
 
         /// <summary>
