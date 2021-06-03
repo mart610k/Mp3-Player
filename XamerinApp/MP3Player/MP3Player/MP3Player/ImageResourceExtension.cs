@@ -12,6 +12,11 @@ namespace MP3Player
     {
         public string Source { get; set; }
 
+        /// <summary>
+        /// Provides a XAML way to obtain an image resource from an embedded Resource
+        /// </summary>
+        /// <param name="serviceProvider">Location of the file</param>
+        /// <returns>object containing the Image source</returns>
         public object ProvideValue(IServiceProvider serviceProvider)
         {
             if (Source == null)
@@ -25,6 +30,11 @@ namespace MP3Player
             return imageSource;
         }
 
+        /// <summary>
+        /// Provides a code based way to obtain an image resource from Embedded resources
+        /// </summary>
+        /// <param name="sourceName">The path to the resource starting with namespace and folder path, all seperated by '.'(full stops) down to the filename</param>
+        /// <returns>The image source for that location</returns>
         public static ImageSource GetImageSource(string sourceName)
         {
             if (sourceName == null)

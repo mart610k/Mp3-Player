@@ -15,7 +15,15 @@ namespace MP3Player
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PlaylistView : ContentPage,IMessagePublisher
     {
+        /// <summary>
+        /// Responsible for creating Device specific objects and references
+        /// </summary>
         IEnvironmentFactory environmentFactory = DependencyService.Get<IEnvironmentFactory>();
+
+        /// <summary>
+        /// Currently selected playlist to be chosen for the music player
+        /// </summary>
+        IPlayList selectedPLaylist = null;
 
 
         public ObservableCollection<IPlayList> PlayList { get; private set; }
@@ -24,6 +32,7 @@ namespace MP3Player
             PlayList = new ObservableCollection<IPlayList>();
             InitializeComponent();
 
+            //Create a working playlist before setting the data
             IPlayList playList = environmentFactory.CreateEmptyPlayList("Hardstyle");
             playList.AddTrack(environmentFactory.CreateTrack("Unity (Original Mix)", "2 Best Enemies", "Music/2 Best Enemies - Unity (Original Mix).mp3"));
             playList.AddTrack(environmentFactory.CreateTrack("Marked For Life", "A-Lusion", "Music/A-Lusion - Marked For Life.mp3"));
@@ -44,8 +53,9 @@ namespace MP3Player
             playList.AddTrack(environmentFactory.CreateTrack("Club Bizarre (Headhunterz & Noisecontrollers Remix)", "Brooklyn Bounce", "Music/Brooklyn Bounce - Club Bizarre (Headhunterz & Noisecontrollers Remix).mp3"));
             playList.AddTrack(environmentFactory.CreateTrack("Heavyweight", "Catatonic Overload", "Music/Catatonic Overload  - Heavyweight.mp3"));
             playList.AddTrack(environmentFactory.CreateTrack("Paralyzed", "Catatonic Overload", "Music/Catatonic Overload  - Paralyzed.mp3"));
-
             PlayList.Add(playList);
+
+            //Generate static and temporary playlists for testing
             PlayList.Add(environmentFactory.CreateEmptyPlayList("First"));
             PlayList.Add(environmentFactory.CreateEmptyPlayList("Second"));
             PlayList.Add(environmentFactory.CreateEmptyPlayList("Third"));
@@ -53,33 +63,37 @@ namespace MP3Player
             PlayList.Add(environmentFactory.CreateEmptyPlayList("Fifth"));
         }
 
+        /// <summary>
+        /// Prepares page before view is to be set up
+        /// </summary>
         protected override void OnAppearing()
         {
-
             iList.ItemsSource = PlayList;
-            foreach (IPlayList i in PlayList)
-            {
-                Console.WriteLine("Playlist!");
-            }
 
             base.OnAppearing();
         }
 
+
+        /// <summary>
+        /// Triggers the selection and sends message back to Main page on which track is selected
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void SelectPlayList(object sender, EventArgs e)
         {
-            if (sender is MenuItem)
+            if(selectedPLaylist != null)
             {
-                MenuItem mi = (MenuItem)sender;
-                Console.WriteLine(mi.CommandParameter);
-                if (mi.CommandParameter is IPlayList)
-                {
-                    MessagingCenter.Send<IMessagePublisher, IPlayList>(this, "SelectedPlayList", (IPlayList)mi.CommandParameter);
-                    await Navigation.PopToRootAsync();
-
-                }
+                MessagingCenter.Send<IMessagePublisher, IPlayList>(this, "SelectedPlayList", selectedPLaylist);
+                await Navigation.PopToRootAsync();
             }
         }
 
+
+        /// <summary>
+        /// Deletes a playlist from the current view
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void OnDeleteDeletePlayList(object sender, EventArgs e)
         {
             if(sender is MenuItem)
@@ -99,11 +113,22 @@ namespace MP3Player
             
 
         }
+
+        /// <summary>
+        /// Adds a new playlist to the application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddNewPlayList(object sender, EventArgs e)
         {
             PlayList.Add(environmentFactory.CreateEmptyPlayList("New"));
         }
 
+        /// <summary>
+        /// Should be used to obtain all tracks within the app directory folder.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GetTracks(object sender, EventArgs e)
         {
             string[] tracks = environmentFactory.CreateFileServicePublicAccess("").GetAllFilesWithExtension("mp3");
@@ -114,11 +139,23 @@ namespace MP3Player
             }
         }
 
-       
 
-        private void MenuItem_Clicked(object sender, EventArgs e)
+        /// <summary>
+        /// Fires as soon as a menu item are selected on the GUI
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnPlayListTap(object sender, ItemTappedEventArgs e)
         {
-
+            if (sender is ListView)
+            {
+                ListView mi = (ListView)sender;
+                if (mi.SelectedItem is IPlayList)
+                {
+                    SelectPlayListButton.IsEnabled = true;
+                    selectedPLaylist = (IPlayList)mi.SelectedItem;
+                }
+            }
         }
     }
 }

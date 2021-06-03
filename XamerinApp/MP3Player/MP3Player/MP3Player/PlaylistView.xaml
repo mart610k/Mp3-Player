@@ -4,7 +4,7 @@
              x:Class="MP3Player.PlaylistView"
              >
     <StackLayout>
-        <ListView  x:Name="iList" SelectionMode="None" IsPullToRefreshEnabled="true">
+        <ListView  x:Name="iList"  IsPullToRefreshEnabled="true" ItemTapped="OnPlayListTap">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -19,7 +19,7 @@
 
                             </MenuItem>
                         </ViewCell.ContextActions>
-                        <StackLayout Margin="1">
+                        <StackLayout Margin="1" >
                             <Label Text="{Binding Name}"/>
                         </StackLayout>
 
@@ -32,9 +32,9 @@
                     Text="NVG"
                     Clicked="NavigateToView"
                     />-->
-        <Button Grid.Column="1"
-                    Text="GetTracks"
-                    Clicked="GetTracks"
+        <Button x:Name="SelectPlayListButton" Grid.Column="1" IsEnabled="False"
+                    Text="Select Playlist"
+                    Clicked="SelectPlayList"
                     />
 
         <Button Grid.Column="2"
