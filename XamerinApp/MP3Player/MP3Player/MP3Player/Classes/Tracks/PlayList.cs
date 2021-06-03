@@ -8,6 +8,12 @@ namespace MP3Player.Classes.Tracks
         List<ITrackSimple> playList = new List<ITrackSimple>();
         int currentTrack = -1;
 
+        public string Name { get; private set; }
+
+        public PlayList(string playListName)
+        {
+            Name = playListName;
+        }
 
         public void AddTrack(ITrackSimple track)
         {

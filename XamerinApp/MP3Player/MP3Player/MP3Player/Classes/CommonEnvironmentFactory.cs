@@ -5,9 +5,9 @@ namespace MP3Player.Classes
 {
     public abstract class CommonEnvironmentFactory : IEnvironmentFactory
     {
-        public IPlayList CreateEmptyPlayList()
+        public IPlayList CreateEmptyPlayList(string playlistName)
         {
-            return new PlayList();
+            return new PlayList(playlistName);
         }
 
         public abstract IFileService CreateFileServiceCustomPath(string[] paths);

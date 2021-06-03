@@ -4,12 +4,23 @@
              x:Class="MP3Player.PlaylistView"
              >
     <StackLayout>
-        <ListView  x:Name="iList">
+        <ListView  x:Name="iList" SelectionMode="None" IsPullToRefreshEnabled="true">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Clicked="SelectPlayList" Text="Select"
+                                      CommandParameter="{Binding .}">
+
+                            </MenuItem>
+
+                            <MenuItem Clicked="OnDeleteDeletePlayList" Text="Remove"
+                                      CommandParameter="{Binding .}" IsDestructive="True"  >
+
+                            </MenuItem>
+                        </ViewCell.ContextActions>
                         <StackLayout Margin="1">
-                            <Label Text="Test"/>
+                            <Label Text="{Binding Name}"/>
                         </StackLayout>
 
                     </ViewCell>
@@ -17,13 +28,18 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Button Grid.Column="4"
+        <!--<Button Grid.Column="4"
                     Text="NVG"
                     Clicked="NavigateToView"
-                    />
+                    />-->
         <Button Grid.Column="1"
                     Text="GetTracks"
                     Clicked="GetTracks"
+                    />
+
+        <Button Grid.Column="2"
+                    Text="AddPlaylist"
+                    Clicked="AddNewPlayList"
                     />
 
     </StackLayout>

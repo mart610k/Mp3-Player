@@ -16,8 +16,9 @@ namespace MP3Player.Classes
         /// <summary>
         /// Creates an empty playlist 
         /// </summary>
+        /// <param name="playlistName">The PlaylistName name</param>
         /// <returns>playlist object with no tracks</returns>
-        IPlayList CreateEmptyPlayList();
+        IPlayList CreateEmptyPlayList(string playlistName);
 
         /// <summary>
         /// Creats a track object with the name,artist and filename

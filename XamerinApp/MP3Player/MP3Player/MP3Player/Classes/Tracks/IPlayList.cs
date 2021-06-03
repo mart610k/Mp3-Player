@@ -3,6 +3,8 @@
     public interface IPlayList
     {
         
+        string Name { get; }
+
         /// <summary>
         /// Adds a track into the playlist
         /// </summary>

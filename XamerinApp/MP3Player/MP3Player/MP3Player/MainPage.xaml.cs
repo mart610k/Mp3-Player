@@ -24,10 +24,18 @@ namespace MP3Player
               }
             );
             MessagingCenter.Subscribe<IMessagePublisher>(this, "PermissionFileReadWriteFailed", (sender) =>
-            {
-                environmentFactory.GetCloseableApplication().CloseApplication();
+                {
+                    environmentFactory.GetCloseableApplication().CloseApplication();
                 
+                }
+            );
+
+            MessagingCenter.Subscribe<IMessagePublisher,IPlayList>(this, "SelectedPlayList", (sender,args) =>
+            {
+                SelectPlayList(args);
             }
+
+
             );
             PlayPauseButtonImgButton.Source = ImageResourceExtension.GetImageSource("MP3Player.Images.play_button.png");
             SkipButtonImgButton.Source = ImageResourceExtension.GetImageSource("MP3Player.Images.skip_button.png");
@@ -49,32 +57,37 @@ namespace MP3Player
             mediaPlayer.PlayPausePlayback();
         }
 
+        private void SelectPlayList(IPlayList playList)
+        {
+            mediaPlayer.SelectPlayList(playList);
+        }
+
         private void InitPlayer()
         {
-            IPlayList playList = environmentFactory.CreateEmptyPlayList();
-            playList.AddTrack(environmentFactory.CreateTrack("Unity (Original Mix)", "2 Best Enemies", "Music/2 Best Enemies - Unity (Original Mix).mp3"));
-            playList.AddTrack(environmentFactory.CreateTrack("Marked For Life", "A-Lusion", "Music/A-Lusion - Marked For Life.mp3"));
-            playList.AddTrack(environmentFactory.CreateTrack("Kick My Brain", "Acti & Darook MC", "Music/Acti & Darook MC - Kick My Brain.mp3"));
-            playList.AddTrack(environmentFactory.CreateTrack("One I Love", "Activator", "Music/Activator - One I Love.mp3"));
-            playList.AddTrack(environmentFactory.CreateTrack("Supersonic Bass", "Activator", "Music/Activator - Supersonic Bass.mp3"));
-            playList.AddTrack(environmentFactory.CreateTrack("Atrocious (Original Mix)", "Alpha2 & Wildstylez", "Music/Alpha2 & Wildstylez - Atrocious (Original Mix).mp3"));
-            playList.AddTrack(environmentFactory.CreateTrack("Feel Good (Gentalica Remix)", "Alphaverb", "Music/Alphaverb - Feel Good (Gentalica Remix).mp3"));
-            playList.AddTrack(environmentFactory.CreateTrack("Rockin da Rework (Extended Mix)", "Alphaverb", "Music/Alphaverb - Rockin da Rework (Extended Mix).mp3"));
-            playList.AddTrack(environmentFactory.CreateTrack("The Otherside  (Extended Album Mix)", "Alphaverb", "Music/Alphaverb - The Otherside  (Extended Album Mix).mp3"));
-            playList.AddTrack(environmentFactory.CreateTrack("Thunderstyle (Remastered Club Mix)", "Alphaverb", "Music/Alphaverb - Thunderstyle (Remastered Club Mix).mp3"));
-            playList.AddTrack(environmentFactory.CreateTrack("Rock the Dancefloor", "Ambassador Inc", "Music/Ambassador Inc - Rock the Dancefloor.mp3"));
-            playList.AddTrack(environmentFactory.CreateTrack("Silence", "Ambassador Inc", "Music/Ambassador Inc - Silence.mp3"));
-            playList.AddTrack(environmentFactory.CreateTrack("The Hardstyle Nation", "Ambassador Inc", "Music/Ambassador Inc - The Hardstyle Nation.mp3"));
-            playList.AddTrack(environmentFactory.CreateTrack("Cause & Effect (Original Mix)", "Anderson T", "Music/Anderson T  - Cause & Effect (Original Mix).mp3"));
-            playList.AddTrack(environmentFactory.CreateTrack("Rebellion", "B-Twinz", "Music/B-Twinz - Rebellion.mp3"));
-            playList.AddTrack(environmentFactory.CreateTrack("Real Street Shit (Original Mix)", "Brian NRG", "Music/Brian NRG - Real Street Shit (Original Mix).mp3"));
-            playList.AddTrack(environmentFactory.CreateTrack("Club Bizarre (Headhunterz & Noisecontrollers Remix)", "Brooklyn Bounce", "Music/Brooklyn Bounce - Club Bizarre (Headhunterz & Noisecontrollers Remix).mp3"));
-            playList.AddTrack(environmentFactory.CreateTrack("Heavyweight", "Catatonic Overload", "Music/Catatonic Overload  - Heavyweight.mp3"));
-            playList.AddTrack(environmentFactory.CreateTrack("Paralyzed", "Catatonic Overload", "Music/Catatonic Overload  - Paralyzed.mp3"));
+            //IPlayList playList = environmentFactory.CreateEmptyPlayList("Test");
+            //playList.AddTrack(environmentFactory.CreateTrack("Unity (Original Mix)", "2 Best Enemies", "Music/2 Best Enemies - Unity (Original Mix).mp3"));
+            //playList.AddTrack(environmentFactory.CreateTrack("Marked For Life", "A-Lusion", "Music/A-Lusion - Marked For Life.mp3"));
+            //playList.AddTrack(environmentFactory.CreateTrack("Kick My Brain", "Acti & Darook MC", "Music/Acti & Darook MC - Kick My Brain.mp3"));
+            //playList.AddTrack(environmentFactory.CreateTrack("One I Love", "Activator", "Music/Activator - One I Love.mp3"));
+            //playList.AddTrack(environmentFactory.CreateTrack("Supersonic Bass", "Activator", "Music/Activator - Supersonic Bass.mp3"));
+            //playList.AddTrack(environmentFactory.CreateTrack("Atrocious (Original Mix)", "Alpha2 & Wildstylez", "Music/Alpha2 & Wildstylez - Atrocious (Original Mix).mp3"));
+            //playList.AddTrack(environmentFactory.CreateTrack("Feel Good (Gentalica Remix)", "Alphaverb", "Music/Alphaverb - Feel Good (Gentalica Remix).mp3"));
+            //playList.AddTrack(environmentFactory.CreateTrack("Rockin da Rework (Extended Mix)", "Alphaverb", "Music/Alphaverb - Rockin da Rework (Extended Mix).mp3"));
+            //playList.AddTrack(environmentFactory.CreateTrack("The Otherside  (Extended Album Mix)", "Alphaverb", "Music/Alphaverb - The Otherside  (Extended Album Mix).mp3"));
+            //playList.AddTrack(environmentFactory.CreateTrack("Thunderstyle (Remastered Club Mix)", "Alphaverb", "Music/Alphaverb - Thunderstyle (Remastered Club Mix).mp3"));
+            //playList.AddTrack(environmentFactory.CreateTrack("Rock the Dancefloor", "Ambassador Inc", "Music/Ambassador Inc - Rock the Dancefloor.mp3"));
+            //playList.AddTrack(environmentFactory.CreateTrack("Silence", "Ambassador Inc", "Music/Ambassador Inc - Silence.mp3"));
+            //playList.AddTrack(environmentFactory.CreateTrack("The Hardstyle Nation", "Ambassador Inc", "Music/Ambassador Inc - The Hardstyle Nation.mp3"));
+            //playList.AddTrack(environmentFactory.CreateTrack("Cause & Effect (Original Mix)", "Anderson T", "Music/Anderson T  - Cause & Effect (Original Mix).mp3"));
+            //playList.AddTrack(environmentFactory.CreateTrack("Rebellion", "B-Twinz", "Music/B-Twinz - Rebellion.mp3"));
+            //playList.AddTrack(environmentFactory.CreateTrack("Real Street Shit (Original Mix)", "Brian NRG", "Music/Brian NRG - Real Street Shit (Original Mix).mp3"));
+            //playList.AddTrack(environmentFactory.CreateTrack("Club Bizarre (Headhunterz & Noisecontrollers Remix)", "Brooklyn Bounce", "Music/Brooklyn Bounce - Club Bizarre (Headhunterz & Noisecontrollers Remix).mp3"));
+            //playList.AddTrack(environmentFactory.CreateTrack("Heavyweight", "Catatonic Overload", "Music/Catatonic Overload  - Heavyweight.mp3"));
+            //playList.AddTrack(environmentFactory.CreateTrack("Paralyzed", "Catatonic Overload", "Music/Catatonic Overload  - Paralyzed.mp3"));
 
-            mediaPlayer = environmentFactory.CreateMediaPlayer(environmentFactory.CreateFileServicePublicAccess(""), environmentFactory.CreateEmptyPlayList());
+            mediaPlayer = environmentFactory.CreateMediaPlayer(environmentFactory.CreateFileServicePublicAccess(""), environmentFactory.CreateEmptyPlayList("Test"));
             mediaPlayer.RegisterObserver(this);
-            mediaPlayer.SelectPlayList(playList);
+            //mediaPlayer.SelectPlayList(playList);
 
         }
 
