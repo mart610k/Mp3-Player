@@ -39,8 +39,18 @@ namespace MP3Player
         {
             iListTracks.ItemsSource = playList.Playlist;
             iList.ItemsSource = TracksPosibleToBeAdded;
+            RemoveExistingTracks();
 
             base.OnAppearing();
+        }
+
+        private void RemoveExistingTracks()
+        {
+
+            foreach (ITrackSimple item in playList.Playlist)
+            {
+                TracksPosibleToBeAdded.Remove(TracksPosibleToBeAdded.Where(x => x.LocalFileName == item.LocalFileName).Single());
+            }
         }
 
         private void AddTrackToPlaylist(object sender, EventArgs e)
@@ -53,8 +63,12 @@ namespace MP3Player
                 if (mi.CommandParameter is ITrackSimple)
                 {
                     playList.AddTrack((ITrackSimple)mi.CommandParameter);
+                    TracksPosibleToBeAdded.Remove((ITrackSimple)mi.CommandParameter);
+                    GetPlayListTracks();
+
                 }
             }
+            
         }
         private void RemoveTrackFromPlaylist(object sender, EventArgs e)
         {
@@ -66,16 +80,18 @@ namespace MP3Player
                 if (mi.CommandParameter is ITrackSimple)
                 {
                     playList.RemoveTrack((ITrackSimple)mi.CommandParameter);
+                    TracksPosibleToBeAdded.Add((ITrackSimple)mi.CommandParameter);
                 }
             }
-            iListTracks.ItemsSource = null;
-            iListTracks.ItemsSource = playList.Playlist;
+            GetPlayListTracks();
+
         }
 
         
         private void GetPlayListTracks()
         {
-            
+            iListTracks.ItemsSource = null;
+            iListTracks.ItemsSource = playList.Playlist;
         }
 
         private void GetAllTracks()
