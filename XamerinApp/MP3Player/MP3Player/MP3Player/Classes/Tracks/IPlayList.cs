@@ -1,9 +1,13 @@
-﻿namespace MP3Player.Classes.Tracks
+﻿using System.Collections.Generic;
+
+namespace MP3Player.Classes.Tracks
 {
     public interface IPlayList
     {
         
         string Name { get; }
+
+        List<ITrackSimple> Playlist { get; }
 
         /// <summary>
         /// Adds a track into the playlist

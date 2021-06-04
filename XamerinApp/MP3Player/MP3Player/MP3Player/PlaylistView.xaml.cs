@@ -148,22 +148,7 @@ namespace MP3Player
             }
         }
 
-        /// <summary>
-        /// Should be used to obtain all tracks within the app directory folder.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void GetTracks(object sender, EventArgs e)
-        {
-            string[] tracks = environmentFactory.CreateFileServicePublicAccess("").GetAllFilesWithExtension("mp3");
-
-            foreach (string item in tracks)
-            {
-                Console.WriteLine(item);
-            }
-        }
-
-
+        
         /// <summary>
         /// Fires as soon as a menu item are selected on the GUI
         /// </summary>
